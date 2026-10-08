@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { EcouteInstallation } from "@/components/shell/ecoute-installation";
 import { MobileShell } from "@/components/shell/mobile-shell";
 
 const poppins = localFont({
@@ -16,6 +17,8 @@ const poppins = localFont({
 export const metadata: Metadata = {
   title: "Collaborateur — Beauty and Co",
   description: "Espace collaborateur Beauty and Co.",
+  // Installée sur l'écran d'accueil d'un iPhone : plein écran, nommée comme l'icône.
+  appleWebApp: { capable: true, title: "B&Co", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
@@ -33,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full">
+        <EcouteInstallation />
         <MobileShell>{children}</MobileShell>
       </body>
     </html>

@@ -3,6 +3,7 @@
 import { CalendarDays } from "lucide-react";
 import { BoutonProfil } from "@/components/accueil/bouton-profil";
 import { CarteQR } from "@/components/accueil/carte-qr";
+import { InvitationInstallation } from "@/components/accueil/invitation-installation";
 import { ReponseConge } from "@/components/accueil/reponse-conge";
 import { IconeBillets } from "@/components/ui/atoms/icone-billets";
 import { Logo } from "@/components/ui/atoms/logo";
@@ -93,6 +94,7 @@ export default function AccueilPage() {
         </nav>
       </div>
       <div aria-hidden className="shrink-0" style={{ height: "var(--bas)" }} />
+      <InvitationInstallation />
     </main>
   );
 }
