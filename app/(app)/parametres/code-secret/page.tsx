@@ -39,7 +39,7 @@ export default function ChangerCodePage() {
   return (
     <main className="flex flex-1 flex-col">
       <BarreHaut gauche={<BoutonRetour onClick={f.retour} />} titre="Code secret" />
-      <div className="mt-2">
+      <div className="mt-2 ecran-bas:mt-1">
         <Progression etape={f.progression.etape} total={f.progression.total} />
       </div>
       <SaisieCode

@@ -1,7 +1,7 @@
 import { fermerSession, ouvrirSession, useAppStore } from "@/lib/store/app-store";
 import { isValidCode, isValidPhone, normalizePhone, todayISO } from "@/lib/format";
 import { ROUTES } from "@/lib/routes";
-import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, MessageVocal } from "@/lib/data/types";
+import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, RaisonConge } from "@/lib/data/types";
 
 /**
  * L'API simulée — la seule porte des écrans vers les données. Chaque appel est asynchrone avec
@@ -27,7 +27,7 @@ export type ApiErrorCode =
   | "ancien_code_incorrect"
   | "photo_requise"
   | "dates_invalides"
-  | "vocal_requis"
+  | "raison_requise"
   | "montant_invalide"
   | "lien_invalide"
   | "non_connecte";
@@ -37,13 +37,19 @@ const wait = () => new Promise((r) => setTimeout(r, LATENCE_MS));
 const nextId = (prefix: string) => `${prefix}-${Date.now().toString(36)}`;
 
 /**
- * Démo ouverte : n'importe quel numéro et n'importe quel code secret ouvrent une session. Un
- * numéro inconnu entre sur le compte de démo ; un numéro connu garde son parcours (première
- * connexion comprise). Les comptes et codes de `lib/data/collaborateurs.ts` restent valables :
- * passer à `false` pour revenir aux vrais contrôles.
+ * Démo ouverte : n'importe quel numéro et n'importe quel code secret marchent. Un numéro inconnu
+ * crée un compte neuf (sans photo ni code) et passe par la Première connexion, comme une
+ * inscription ; un numéro connu garde son parcours. Les comptes et codes de
+ * `lib/data/collaborateurs.ts` restent valables : passer à `false` pour revenir aux vrais contrôles.
  */
 const DEMO_OUVERTE = true;
-const COMPTE_DEMO = "bineta";
+
+/** Démo ouverte : le compte neuf d'un numéro inconnu. */
+function inscrire(numero: string): Collaborateur {
+  const c: Collaborateur = { id: `collaborateur-${numero}`, name: "Collaborateur", role: "coiffeuse", phone: numero, photoUrl: null };
+  set((s) => ({ collaborateurs: [...s.collaborateurs, c], comptes: { ...s.comptes, [c.id]: { code: null } } }));
+  return c;
+}
 
 
 const get = () => useAppStore.getState();
@@ -66,9 +72,7 @@ function majCode(id: string, code: string) {
 
 function parNumero(phone: string): Collaborateur | undefined {
   const numero = normalizePhone(phone);
-  if (!isValidPhone(numero)) return undefined;
-  const c = get().collaborateurs.find((x) => x.phone === numero);
-  return c ?? (DEMO_OUVERTE ? get().collaborateurs.find((x) => x.id === COMPTE_DEMO) : undefined);
+  return isValidPhone(numero) ? get().collaborateurs.find((x) => x.phone === numero) : undefined;
 }
 
 // ── Connexion ────────────────────────────────────────────────────────────
@@ -87,7 +91,8 @@ export type ResultatIdentification = {
  */
 export async function identifier(phone: string): Promise<ResultatIdentification> {
   await wait();
-  const c = parNumero(phone);
+  const numero = normalizePhone(phone);
+  const c = parNumero(numero) ?? (DEMO_OUVERTE && isValidPhone(numero) ? inscrire(numero) : undefined);
   if (!c) throw new ApiError("numero_inconnu", "Ce numéro n'est pas reconnu. Rapprochez-vous du salon.");
   const premiereConnexion = get().comptes[c.id]?.code == null;
   if (premiereConnexion) ouvrirSession(c.id);
@@ -266,7 +271,7 @@ export async function desactiverBiometrie(): Promise<void> {
 
 // ── Demandes ─────────────────────────────────────────────────────────────
 
-export type NouvelleDemandeConge = { debut: string; fin: string; raison: MessageVocal | null };
+export type NouvelleDemandeConge = { debut: string; fin: string; raison: RaisonConge | null };
 
 export async function demanderConge({ debut, fin, raison }: NouvelleDemandeConge): Promise<void> {
   await wait();
@@ -274,13 +279,15 @@ export async function demanderConge({ debut, fin, raison }: NouvelleDemandeConge
   if (!debut || !fin || debut < todayISO() || fin < debut) {
     throw new ApiError("dates_invalides", "Vérifiez les dates : la fin ne peut pas précéder le début.");
   }
-  if (!raison?.url) throw new ApiError("vocal_requis", "Enregistrez la raison du congé.");
+  if (!raison?.vocal?.url && !raison?.texte?.trim()) {
+    throw new ApiError("raison_requise", "Dites ou écrivez la raison du congé.");
+  }
   const demande: DemandeConge = {
     id: nextId("dc"),
     collaborateurId: c.id,
     debut,
     fin,
-    raison,
+    raison: raison.texte !== undefined ? { texte: raison.texte.trim() } : raison,
     envoyeeLe: new Date().toISOString(),
     decision: null,
   };

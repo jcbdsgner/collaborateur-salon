@@ -27,6 +27,9 @@ export type Compte = {
 /** Un message vocal enregistré sur le téléphone (data URL, gardée en local — pas de backend). */
 export type MessageVocal = { url: string; dureeSec: number };
 
+/** La raison d'un congé : dite en vocal (pour qui ne lit pas) ou écrite. */
+export type RaisonConge = { vocal: MessageVocal; texte?: undefined } | { texte: string; vocal?: undefined };
+
 export type DemandeConge = {
   id: string;
   collaborateurId: string;
@@ -34,8 +37,8 @@ export type DemandeConge = {
   debut: string;
   /** ISO date (yyyy-MM-dd), ≥ debut. */
   fin: string;
-  /** La raison, enregistrée en vocal (pas de texte : l'app doit servir à qui ne lit pas). */
-  raison: MessageVocal | null;
+  /** La raison, en vocal ou écrite. */
+  raison: RaisonConge | null;
   /** ISO datetime. */
   envoyeeLe: string;
   /** Absente ⇒ pas encore de décision : rien ne s'affiche à l'Accueil. */

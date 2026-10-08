@@ -22,7 +22,7 @@ export function CadenasAnime({ etat, succes = false }: { etat: EtatCadenas; succ
     <span
       aria-hidden
       className={cn(
-        "flex size-16 items-center justify-center rounded-full transition-colors duration-300",
+        "flex size-16 items-center justify-center rounded-full transition-colors duration-300 ecran-bas:size-14",
         succes ? "bg-success-soft text-success" : "bg-accent text-secondary",
       )}
     >
