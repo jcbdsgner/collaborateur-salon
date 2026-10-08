@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Download, Ellipsis, Share, SquarePlus } from "lucide-react";
 import { Bouton } from "@/components/ui/atoms/bouton";
-import { useInstallation } from "@/hooks/use-installation";
+import { useInstallation, type ModeInstallation } from "@/hooks/use-installation";
 
 /** Un geste à faire dans Safari : son icône en grand, telle qu'on la voit à l'écran, et son nom. */
 function Geste({ n, icone: Icone, children }: { n: number; icone: typeof Share; children: React.ReactNode }) {
@@ -19,13 +19,20 @@ function Geste({ n, icone: Icone, children }: { n: number; icone: typeof Share; 
 }
 
 /**
- * Proposition d'installer l'app sur l'écran d'accueil, en feuille au bas de l'Accueil (posée
- * par-dessus : la mise en page de l'Accueil ne bouge pas). Une seule décision : installer, ou
- * plus tard. Sur iPhone, les deux gestes à faire dans Safari, avec leurs icônes.
+ * Installer l'app sur l'écran d'accueil, en feuille au bas de l'écran (posée par-dessus : la mise
+ * en page dessous ne bouge pas). Une seule décision : installer, ou plus tard. Sur iPhone, les deux
+ * gestes à faire dans Safari, avec leurs icônes.
  */
-export function InvitationInstallation() {
-  const { mode, installer, plusTard } = useInstallation();
-  if (!mode) return null;
+export function FeuilleInstallation({
+  mode,
+  installer,
+  fermer,
+}: {
+  mode: Exclude<ModeInstallation, null>;
+  installer: () => void;
+  fermer: () => void;
+}) {
+  const plusTard = fermer;
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center">
@@ -71,4 +78,11 @@ export function InvitationInstallation() {
       </section>
     </div>
   );
+}
+
+/** L'Accueil propose l'installation de lui-même, tant qu'elle n'a pas été repoussée. */
+export function InvitationInstallation() {
+  const { mode, aProposer, installer, plusTard } = useInstallation();
+  if (!mode || !aProposer) return null;
+  return <FeuilleInstallation mode={mode} installer={installer} fermer={plusTard} />;
 }

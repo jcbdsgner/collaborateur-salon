@@ -14,18 +14,21 @@ function Icone({ icone: I }: { icone: LucideIcon }) {
 
 /**
  * Une ligne de réglage (référence Pinterest « compte, liste épurée ») : icône dans un rond rose,
- * libellé, puis à droite une flèche (`href`, ça ouvre un écran) ou un contrôle (`droite`).
+ * libellé, puis à droite une flèche (`href` ou `onClick` : ça ouvre un écran ou une fenêtre) ou un
+ * contrôle (`droite`).
  */
 export function LigneReglage({
   icone,
   label,
   href,
+  onClick,
   droite,
   id,
 }: {
   icone: LucideIcon;
   label: string;
   href?: string;
+  onClick?: () => void;
   droite?: React.ReactNode;
   /** Pour relier un contrôle (`aria-labelledby`) à son libellé. */
   id?: string;
@@ -37,6 +40,15 @@ export function LigneReglage({
         <span className="flex-1 text-[17px]">{label}</span>
         <ChevronRight aria-hidden className="size-5 text-gray-400" />
       </Link>
+    );
+  }
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={cn(base, "transition active:bg-base-200")}>
+        <Icone icone={icone} />
+        <span className="flex-1 text-[17px]">{label}</span>
+        <ChevronRight aria-hidden className="size-5 text-gray-400" />
+      </button>
     );
   }
   return (

@@ -51,33 +51,33 @@ function estIOS() {
 export type ModeInstallation = "invitation" | "ios" | null;
 
 /**
- * Proposer d'installer l'app sur l'écran d'accueil, pour l'ouvrir d'un geste comme une vraie app.
+ * Installer l'app sur l'écran d'accueil, pour l'ouvrir d'un geste comme une vraie app.
  * - Chrome / Android : un bouton ouvre la fenêtre d'installation du navigateur ;
  * - iPhone : Safari n'en a pas, on montre les deux gestes (Partager, puis « Sur l'écran d'accueil ») ;
- * - déjà installée, repoussée (« Plus tard ») ou autre navigateur : rien.
+ * - déjà installée ou autre navigateur : `mode` reste null.
+ * `aProposer` : l'Accueil la propose de lui-même, sauf si elle a été repoussée (« Plus tard »).
+ * Les Paramètres, eux, gardent toujours la ligne « Installer l'app » tant qu'elle est possible.
  */
 export function useInstallation() {
   const invitation = useInvitation((s) => s.invitation);
-  const [ios, setIos] = useState(false);
-  const [masquee, setMasquee] = useState(true);
+  const [appareil, setAppareil] = useState<{ installee: boolean; ios: boolean; repoussee: boolean } | null>(null);
 
   useEffect(() => {
-    if (dejaInstallee() || repousseeJusquA() > Date.now()) return;
     // Lu après le montage (navigateur seulement), comme localStorage.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIos(estIOS());
-    setMasquee(false);
+    setAppareil({ installee: dejaInstallee(), ios: estIOS(), repoussee: repousseeJusquA() > Date.now() });
   }, []);
 
-  const mode: ModeInstallation = masquee ? null : invitation ? "invitation" : ios ? "ios" : null;
+  const mode: ModeInstallation = !appareil || appareil.installee ? null : invitation ? "invitation" : appareil.ios ? "ios" : null;
 
   function plusTard() {
-    setMasquee(true);
+    setAppareil((a) => a && { ...a, repoussee: true });
     try {
       localStorage.setItem(CLE_PLUS_TARD, String(Date.now() + PLUS_TARD_JOURS * 86_400_000));
     } catch {}
   }
 
+  /** Ouvre la fenêtre d'installation du navigateur (Android) ; rien sur iPhone. */
   async function installer() {
     if (!invitation) return;
     await invitation.prompt();
@@ -87,5 +87,5 @@ export function useInstallation() {
     if (outcome === "dismissed") plusTard();
   }
 
-  return { mode, installer, plusTard };
+  return { mode, aProposer: mode !== null && !appareil?.repoussee, installer, plusTard };
 }
