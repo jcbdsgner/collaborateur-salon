@@ -13,7 +13,7 @@ Une partie des collaborateurs ne lit pas. Chaque écran porte **une seule décis
 
 ## Sur ordinateur
 
-L'app ne s'y affiche pas. Sur un grand écran avec souris (≥ 768px de large, sans écran tactile), un seul écran invite à **l'ouvrir sur le téléphone**, avec un QR de l'adresse à scanner à l'appareil photo. Une tablette tactile garde l'app.
+L'app ne s'y affiche pas. Sur un grand écran avec souris (≥ 768px de large, sans écran tactile), un seul écran invite à **l'ouvrir sur le téléphone**, sans rien d'autre. Une tablette tactile garde l'app.
 
 ## Architecture d'information
 
