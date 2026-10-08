@@ -36,6 +36,15 @@ const LATENCE_MS = 400;
 const wait = () => new Promise((r) => setTimeout(r, LATENCE_MS));
 const nextId = (prefix: string) => `${prefix}-${Date.now().toString(36)}`;
 
+/**
+ * Démo ouverte : n'importe quel numéro et n'importe quel code secret ouvrent une session. Un
+ * numéro inconnu entre sur le compte de démo ; un numéro connu garde son parcours (première
+ * connexion comprise). Les comptes et codes de `lib/data/collaborateurs.ts` restent valables :
+ * passer à `false` pour revenir aux vrais contrôles.
+ */
+const DEMO_OUVERTE = true;
+const COMPTE_DEMO = "bineta";
+
 
 const get = () => useAppStore.getState();
 const set = useAppStore.setState;
@@ -57,7 +66,9 @@ function majCode(id: string, code: string) {
 
 function parNumero(phone: string): Collaborateur | undefined {
   const numero = normalizePhone(phone);
-  return isValidPhone(numero) ? get().collaborateurs.find((x) => x.phone === numero) : undefined;
+  if (!isValidPhone(numero)) return undefined;
+  const c = get().collaborateurs.find((x) => x.phone === numero);
+  return c ?? (DEMO_OUVERTE ? get().collaborateurs.find((x) => x.id === COMPTE_DEMO) : undefined);
 }
 
 // ── Connexion ────────────────────────────────────────────────────────────
@@ -88,7 +99,7 @@ export async function connexion(phone: string, code: string): Promise<void> {
   await wait();
   const c = parNumero(phone);
   const compte = c ? get().comptes[c.id] : undefined;
-  if (!c || !compte?.code || compte.code !== code) {
+  if (!c || !compte?.code || (compte.code !== code && !DEMO_OUVERTE)) {
     throw new ApiError("identifiants_invalides", "Code secret incorrect.");
   }
   ouvrirSession(c.id);
