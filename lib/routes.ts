@@ -15,7 +15,7 @@ export const ROUTES = {
   changerCode: "/parametres/code-secret",
   /** Demander un congé, écran 1 : le calendrier. */
   demanderConge: "/conges",
-  /** Demander un congé, écran 2 : la raison, en vocal ou écrite. */
+  /** Demander un congé, écran 2 : la raison en vocal. */
   congeRaison: "/conges/raison",
   demanderAvance: "/avance",
   /** Le lien reçu par SMS (Code secret oublié) : choisir un nouveau code. */

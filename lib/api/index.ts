@@ -1,7 +1,7 @@
 import { fermerSession, ouvrirSession, useAppStore } from "@/lib/store/app-store";
 import { isValidCode, isValidPhone, normalizePhone, todayISO } from "@/lib/format";
 import { ROUTES } from "@/lib/routes";
-import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, RaisonConge } from "@/lib/data/types";
+import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, MessageVocal } from "@/lib/data/types";
 
 /**
  * L'API simulée — la seule porte des écrans vers les données. Chaque appel est asynchrone avec
@@ -27,7 +27,7 @@ export type ApiErrorCode =
   | "ancien_code_incorrect"
   | "photo_requise"
   | "dates_invalides"
-  | "raison_requise"
+  | "vocal_requis"
   | "montant_invalide"
   | "lien_invalide"
   | "non_connecte";
@@ -271,7 +271,7 @@ export async function desactiverBiometrie(): Promise<void> {
 
 // ── Demandes ─────────────────────────────────────────────────────────────
 
-export type NouvelleDemandeConge = { debut: string; fin: string; raison: RaisonConge | null };
+export type NouvelleDemandeConge = { debut: string; fin: string; raison: MessageVocal | null };
 
 export async function demanderConge({ debut, fin, raison }: NouvelleDemandeConge): Promise<void> {
   await wait();
@@ -279,15 +279,13 @@ export async function demanderConge({ debut, fin, raison }: NouvelleDemandeConge
   if (!debut || !fin || debut < todayISO() || fin < debut) {
     throw new ApiError("dates_invalides", "Vérifiez les dates : la fin ne peut pas précéder le début.");
   }
-  if (!raison?.vocal?.url && !raison?.texte?.trim()) {
-    throw new ApiError("raison_requise", "Dites ou écrivez la raison du congé.");
-  }
+  if (!raison?.url) throw new ApiError("vocal_requis", "Enregistrez la raison du congé.");
   const demande: DemandeConge = {
     id: nextId("dc"),
     collaborateurId: c.id,
     debut,
     fin,
-    raison: raison.texte !== undefined ? { texte: raison.texte.trim() } : raison,
+    raison,
     envoyeeLe: new Date().toISOString(),
     decision: null,
   };
