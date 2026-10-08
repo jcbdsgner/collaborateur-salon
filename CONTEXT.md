@@ -31,7 +31,7 @@ Accueil
  ├─ Code QR (en grand)
  ├─ Réponse au dernier congé : ✓ / ✗ + dates (rien tant qu'il n'y a pas de décision)
  ├─ ▶ Paramètres : Changer la photo · [Sécurité : Changer le code secret · Face ID / empreinte] · Se déconnecter
- ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison en vocal ─▶ Envoi
+ ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison (écrite et/ou vocal) ─▶ Envoi
  └─ ▶ Demander une avance : montant ─▶ Envoi
 ```
 
@@ -85,7 +85,7 @@ _Avoid_: Check-in, check-out, badgeage
 **Demande de congé**:
 Elle se fait en 2 écrans (barre de progression), construits comme l'Avance : la valeur en grand au milieu, de quoi la saisir en bas, dans le rose du congé.
 1. **Un seul calendrier** : on touche le premier jour, puis le dernier. Pas de champs « début » et « fin » à lire : au-dessus du calendrier, deux pastilles taupe montrent les jours choisis (« 20 → 24 », le mois dessous) et le **nombre de jours**. Tant qu'un jour manque, son rond en pointillés « respire » pour montrer lequel toucher. Sur le calendrier (des tuiles blanches dans un bloc rose doux, comme celui du QR), le premier et le dernier jour sont en taupe, les jours entre les deux en rose de marque, et les jours passés sont grisés. Un seul jour touché suffit pour continuer : c'est un congé d'un jour. Sur un écran de moins de 700px de haut, le récapitulatif tient sur une ligne pour qu'un mois de 6 semaines tienne sans défiler.
-2. **La raison, en vocal** : les dates en rappel, puis un gros **micro rose** à toucher pour parler et à retoucher pour arrêter (60 s au plus). Pendant l'enregistrement, il passe en taupe avec un carré « stop », un halo suit la voix et un anneau se remplit jusqu'à 60 s. Une fois enregistré, le vocal devient une **note vocale** comme sur WhatsApp (lecture, forme d'onde, durée), avec « Recommencer » sous « Envoyer ».
+2. **La raison, écrite ou en vocal** : les dates en rappel, puis un **champ de texte** (500 caractères au plus) avec, dans son coin bas droit, un **micro rose** pour dire la raison au lieu de l'écrire (60 s au plus) — comme une messagerie. Pendant l'enregistrement, le champ montre le chrono et un halo qui suit la voix ; le micro passe en taupe avec un carré « stop » et un anneau qui se remplit jusqu'à 60 s. Une fois enregistré, le vocal devient une **note vocale** comme sur WhatsApp (lecture, forme d'onde, durée) en bas du champ, avec une corbeille à la place du micro pour l'effacer. Texte et vocal peuvent être envoyés ensemble.
 
 Ensuite, « Envoyer » mène à l'**Envoi**. Aucun statut n'apparaît ensuite et il n'y a pas d'historique. La réponse ne peut être que **Accepté** ou **Refusé** (jamais « en attente »). L'Accueil affiche la réponse à la **dernière** demande dès qu'elle tombe, **en une phrase** : la décision d’abord (« Votre congé est accepté. »), les dates dessous (« Du 20 au 24 octobre »), précédée d'une icône ✓ verte ou ✗ rouge. Elle est dans une **Bulle** gris clair qui arrive par le bas puis fait un petit aller-retour pour montrer qu'on peut la faire glisser. On la **ferme** avec la croix ou en la faisant glisser sur le côté, et elle ne reparaît plus (même après avoir rouvert l'app). Rien ne s'affiche tant qu'il n'y a pas de décision.
 _Avoid_: Absence, Vacances

@@ -1,77 +1,8 @@
-import { Mic, Pause, Play, Square } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** « 0:07 », « 1:00 ». */
 export const duree = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-
-const RAYON = 86;
-const TOUR = 2 * Math.PI * RAYON;
-
-/**
- * Le gros bouton micro, rose comme le congé. Au repos, une onde l'entoure pour inviter à le
- * toucher. Pendant l'enregistrement, il passe en taupe avec un carré « stop », un halo rose
- * suit la voix (on voit que le micro entend) et un anneau se remplit jusqu'à 60 s.
- */
-export function BoutonMicro({
-  enregistre,
-  niveau,
-  secondes,
-  max,
-  onToucher,
-}: {
-  enregistre: boolean;
-  niveau: number;
-  secondes: number;
-  max: number;
-  onToucher: () => void;
-}) {
-  return (
-    <span className="relative flex size-48 items-center justify-center">
-      {enregistre ? (
-        <>
-          <span
-            aria-hidden
-            className="absolute inset-4 rounded-full bg-primary transition-transform duration-100"
-            style={{ transform: `scale(${1 + niveau * 0.3})` }}
-          />
-          <svg aria-hidden viewBox="0 0 192 192" className="absolute inset-0 -rotate-90">
-            <circle cx="96" cy="96" r={RAYON} fill="none" strokeWidth="6" className="stroke-base-300" />
-            <circle
-              cx="96"
-              cy="96"
-              r={RAYON}
-              fill="none"
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeDasharray={TOUR}
-              strokeDashoffset={TOUR * (1 - Math.min(secondes, max) / max)}
-              className="stroke-secondary transition-[stroke-dashoffset] duration-300"
-            />
-          </svg>
-        </>
-      ) : (
-        <span aria-hidden className="absolute inset-6 rounded-full bg-primary anim-micro-appel" />
-      )}
-      <button
-        type="button"
-        onClick={onToucher}
-        aria-pressed={enregistre}
-        aria-label={enregistre ? "Arrêter l'enregistrement" : "Enregistrer la raison"}
-        className={cn(
-          "relative flex size-36 items-center justify-center rounded-full shadow-brand transition active:scale-95",
-          "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--button-2-color)]",
-          enregistre ? "bg-secondary text-secondary-content" : "bg-primary text-secondary",
-        )}
-      >
-        {enregistre ? (
-          <Square aria-hidden fill="currentColor" strokeWidth={0} className="size-12 rounded-lg" />
-        ) : (
-          <Mic aria-hidden strokeWidth={1.75} className="size-16" />
-        )}
-      </button>
-    </span>
-  );
-}
 
 /**
  * Le vocal enregistré, comme une note vocale WhatsApp : lecture / pause, la forme d'onde de la

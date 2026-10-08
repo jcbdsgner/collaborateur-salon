@@ -34,14 +34,18 @@ export function useCongeDates() {
   };
 }
 
+/** Max de caractères d'une raison écrite. */
+export const RAISON_TEXTE_MAX = 500;
+
 /**
- * Demander un congé, écran 2 : la raison en vocal, puis « Envoyer » ⇒ Envoi (coche, son,
- * vibration) et retour à l'Accueil. Aucun statut ni historique ensuite (CONTEXT.md).
+ * Demander un congé, écran 2 : la raison écrite, en vocal (micro dans le champ) ou les deux, puis « Envoyer » ⇒ Envoi
+ * (coche, son, vibration) et retour à l'Accueil. Aucun statut ni historique ensuite (CONTEXT.md).
  */
 export function useCongeRaison() {
   const router = useRouter();
   const { debut, fin } = useBrouillonConge();
   const vocal = useEnregistrementVocal();
+  const [texte, setTexte] = useState("");
   const action = useAsyncAction(demanderConge);
   const envoi = useEnvoi();
 
@@ -56,14 +60,23 @@ export function useCongeRaison() {
     if (envoi.visible) return () => useBrouillonConge.setState({ debut: "", fin: "" });
   }, [envoi.visible]);
 
+  const aVocal = vocal.etat === "enregistre" && Boolean(vocal.vocal);
+  const pret = vocal.etat !== "enregistrement" && (aVocal || texte.trim().length > 0);
+
   return {
     debut,
     fin,
     vocal,
-    canSubmit: vocal.etat === "enregistre" && !action.pending,
+    texte,
+    majTexte: (t: string) => {
+      setTexte(t.slice(0, RAISON_TEXTE_MAX));
+      action.effacer();
+    },
+    canSubmit: pret && !action.pending,
     envoyer: async () => {
-      if (vocal.etat !== "enregistre" || action.pending) return;
-      if (!(await action.run({ debut, fin, raison: vocal.vocal })).ok) return;
+      if (!pret || action.pending) return;
+      const raison = { texte, vocal: aVocal && vocal.vocal ? vocal.vocal : undefined };
+      if (!(await action.run({ debut, fin, raison })).ok) return;
       envoi.montrer();
     },
     envoi: envoi.visible,
