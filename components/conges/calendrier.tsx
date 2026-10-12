@@ -15,13 +15,13 @@ type Props = {
 const fleche = "flex size-12 items-center justify-center rounded-full bg-base-100 text-secondary transition active:scale-90 disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-[var(--button-2-color)]";
 
 /**
- * Le calendrier du congé : des tuiles blanches dans un bloc rose doux, comme le bloc du QR. Le
+ * Le calendrier du congé : des tuiles blanches dans un bloc rose doux (celui des demandes, adouci). Le
  * premier et le dernier jour en taupe (les pastilles du récapitulatif au-dessus), les jours entre
- * les deux en rose de marque — la couleur du congé. Les jours passés sont grisés.
+ * les deux en taupe léger, qui les relie (un rose doux plein se fondrait dans le bloc). Les jours passés sont grisés.
  */
 export function Calendrier({ semaines, joursSemaine, libelleMois, peutReculer, moisPrecedent, moisSuivant, toucher }: Props) {
   return (
-    <div className="rounded-[32px] bg-accent p-3">
+    <div className="rounded-[32px] bg-base-300/50 p-3">
       <div className="mb-1 flex items-center justify-between">
         <button type="button" onClick={moisPrecedent} disabled={!peutReculer} aria-label="Mois précédent" className={fleche}>
           <ChevronLeft aria-hidden strokeWidth={2.25} className="size-6" />
@@ -59,7 +59,7 @@ export function Calendrier({ semaines, joursSemaine, libelleMois, peutReculer, m
                         "focus-visible:outline-2 focus-visible:outline-[var(--button-2-color)]",
                         j.desactive && "text-gray-300",
                         !j.desactive && "bg-base-100 text-base-content",
-                        j.dansLaPlage && "bg-primary",
+                        j.dansLaPlage && "bg-secondary/25",
                         (j.debut || j.fin) && "scale-105 bg-secondary font-semibold text-secondary-content shadow-brand",
                         j.aujourdhui && !(j.debut || j.fin) && "font-bold text-secondary",
                       )}

@@ -22,7 +22,7 @@ export function NoteVocale({
   onEcouter: () => void;
 }) {
   return (
-    <div className="flex w-full items-center gap-3 rounded-full bg-accent p-2 pr-5 animate-in fade-in zoom-in-95 duration-200">
+    <div className="flex w-full items-center gap-3 rounded-full bg-base-300/50 p-2 pr-5 animate-in fade-in zoom-in-95 duration-200">
       <button
         type="button"
         onClick={onEcouter}

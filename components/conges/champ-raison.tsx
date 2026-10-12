@@ -17,7 +17,7 @@ type Props = {
 
 /**
  * La raison du congé, comme une messagerie : un champ de texte, et dans son coin bas droit un
- * micro rose pour dire la raison au lieu (ou en plus) de l'écrire. Pendant l'enregistrement, le
+ * micro rose doux pour dire la raison au lieu (ou en plus) de l'écrire. Pendant l'enregistrement, le
  * champ montre le chrono et un halo qui suit la voix ; le micro devient « stop » et son anneau se
  * remplit jusqu'à 60 s. Ensuite, la note vocale s'affiche en bas du champ, la corbeille à la
  * place du micro pour l'effacer.
@@ -33,7 +33,7 @@ export function ChampRaison({ texte, max, onTexte, vocal }: Props) {
           <span className="relative flex size-16 items-center justify-center">
             <span
               aria-hidden
-              className="absolute inset-0 rounded-full bg-primary transition-transform duration-100"
+              className="absolute inset-0 rounded-full bg-base-300 transition-transform duration-100"
               style={{ transform: `scale(${1 + vocal.niveau * 0.5})` }}
             />
             <Mic aria-hidden strokeWidth={1.75} className="relative size-7 text-secondary" />
@@ -100,7 +100,7 @@ export function ChampRaison({ texte, max, onTexte, vocal }: Props) {
                 />
               </svg>
             ) : (
-              texte.length === 0 && <span aria-hidden className="absolute inset-1 rounded-full bg-primary anim-micro-appel" />
+              texte.length === 0 && <span aria-hidden className="absolute inset-1 rounded-full bg-base-300 anim-micro-appel" />
             )}
             <button
               type="button"
@@ -110,7 +110,7 @@ export function ChampRaison({ texte, max, onTexte, vocal }: Props) {
               className={cn(
                 "relative flex size-14 items-center justify-center rounded-full shadow-brand transition active:scale-90",
                 focusVisible,
-                enregistrement ? "bg-secondary text-secondary-content" : "bg-primary text-secondary",
+                enregistrement ? "bg-secondary text-secondary-content" : "bg-base-300 text-secondary",
               )}
             >
               {enregistrement ? (

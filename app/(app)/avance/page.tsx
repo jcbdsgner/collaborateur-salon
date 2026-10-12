@@ -34,7 +34,7 @@ export default function DemanderAvancePage() {
 
   return (
     <main className="flex flex-1 flex-col">
-      <BarreHaut gauche={<BoutonRetour href={ROUTES.accueil} />} titre="Avance" />
+      <BarreHaut gauche={<BoutonRetour href={ROUTES.demandes} />} titre="Avance" />
 
       <div className="flex flex-1 flex-col items-center justify-center gap-4 px-4">
         <span className="flex size-16 items-center justify-center rounded-full bg-base-300 text-secondary" style={{ "--fond": "var(--color-base-300)" } as React.CSSProperties}>

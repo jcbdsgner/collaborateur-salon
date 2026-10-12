@@ -13,6 +13,10 @@ export const ROUTES = {
   changerPhoto: "/parametres/photo",
   /** Aussi le parcours « Code secret oublié » une fois Face ID / l'empreinte passé. */
   changerCode: "/parametres/code-secret",
+  /** Le planning du collaborateur — écran pas encore dessiné. */
+  planning: "/planning",
+  /** Faire une demande : choisir entre un congé et une avance. */
+  demandes: "/demandes",
   /** Demander un congé, écran 1 : le calendrier. */
   demanderConge: "/conges",
   /** Demander un congé, écran 2 : la raison, en vocal ou écrite. */

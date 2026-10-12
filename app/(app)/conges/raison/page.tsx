@@ -42,7 +42,7 @@ export default function CongeRaisonPage() {
         </Bouton>
       </div>
 
-      {f.envoi && <Envoi ton="rose" onToucher={f.fermerEnvoi} />}
+      {f.envoi && <Envoi ton="rose-doux" onToucher={f.fermerEnvoi} />}
     </main>
   );
 }

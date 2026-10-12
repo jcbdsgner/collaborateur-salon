@@ -1,11 +1,10 @@
 "use client";
 
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Send } from "lucide-react";
 import { BoutonProfil } from "@/components/accueil/bouton-profil";
 import { CarteQR } from "@/components/accueil/carte-qr";
 import { InvitationInstallation } from "@/components/accueil/invitation-installation";
 import { ReponseConge } from "@/components/accueil/reponse-conge";
-import { IconeBillets } from "@/components/ui/atoms/icone-billets";
 import { Logo } from "@/components/ui/atoms/logo";
 import { TuileAction } from "@/components/ui/molecules/tuile-action";
 import { useAccueil } from "@/hooks/use-accueil";
@@ -13,8 +12,8 @@ import { ROUTES } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 /**
- * Accueil : le Code QR en grand, la réponse au dernier congé (bulle) dessous, les deux demandes en
- * bas. Deux dispositions selon la hauteur de l'écran :
+ * Accueil : le Code QR en grand, la réponse au dernier congé (bulle) dessous, deux tuiles en bas :
+ * faire une demande (congé ou avance) et voir son planning. Deux dispositions selon la hauteur de l'écran :
  * - petit écran : une ligne d'en-tête au-dessus du QR, logo à gauche, sa photo à droite ;
  * - écran haut (≥ 800px, `ecran-haut:`) : sa photo en badge sur le bloc du QR, comme une carte de
  *   salarié, et le logo en grand dans le blanc du haut.
@@ -88,9 +87,9 @@ export default function AccueilPage() {
           </section>
         )}
 
-        <nav aria-label="Demandes" className="grid grid-cols-2 gap-3">
-          <TuileAction href={ROUTES.demanderConge} icone={CalendarDays} verbe="Demander" objet="un congé" ton="rose" />
-          <TuileAction href={ROUTES.demanderAvance} icone={IconeBillets} verbe="Demander" objet="une avance" ton="rose-doux" />
+        <nav aria-label="Menu" className="grid grid-cols-2 gap-3">
+          <TuileAction href={ROUTES.demandes} icone={Send} verbe="Faire" objet="une demande" ton="rose-doux" />
+          <TuileAction href={ROUTES.planning} icone={CalendarDays} verbe="Voir" objet="mon planning" ton="rose" />
         </nav>
       </div>
       <div aria-hidden className="shrink-0" style={{ height: "var(--bas)" }} />

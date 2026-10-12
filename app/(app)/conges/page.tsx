@@ -20,7 +20,7 @@ export default function CongeDatesPage() {
 
   return (
     <main className="flex flex-1 flex-col">
-      <BarreHaut gauche={<BoutonRetour href={ROUTES.accueil} />} titre="Congé" />
+      <BarreHaut gauche={<BoutonRetour href={ROUTES.demandes} />} titre="Congé" />
       <div className="mt-2">
         <Progression etape={1} total={2} />
       </div>

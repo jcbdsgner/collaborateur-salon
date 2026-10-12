@@ -31,8 +31,10 @@ Accueil
  ├─ Code QR (en grand)
  ├─ Réponse au dernier congé : ✓ / ✗ + dates (rien tant qu'il n'y a pas de décision)
  ├─ ▶ Paramètres : Changer la photo · [Sécurité : Changer le code secret · Face ID / empreinte] · Se déconnecter
- ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison (écrite et/ou vocal) ─▶ Envoi
- └─ ▶ Demander une avance : montant ─▶ Envoi
+ ├─ ▶ Faire une demande :
+ │     ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison (écrite et/ou vocal) ─▶ Envoi
+ │     └─ ▶ Demander une avance : montant ─▶ Envoi
+ └─ ▶ Voir mon planning (écran pas encore dessiné)
 ```
 
 ## Language
@@ -72,7 +74,7 @@ Se connecter avec le moyen de déverrouillage du téléphone (Face ID, Touch ID,
 _Avoid_: Passkey
 
 **Accueil**:
-L'écran d'atterrissage, centré sur le **Code QR** affiché en grand. Il porte aussi la réponse au dernier congé, le **logo** Beauty and Co et l'accès aux Paramètres par la **photo** du collaborateur (elle dit « c'est mon code », et une pastille roue dentée montre qu'elle se touche). Sur un petit écran, ils forment une ligne d'en-tête au-dessus du QR (logo de 80px à gauche, photo à droite) ; sur un écran haut (≥ 800px), la photo est à cheval sur le bloc du QR comme sur une carte de salarié, et le logo s'affiche en grand dans le blanc du haut. Le **QR est prioritaire** : sur un écran de moins de 700px de haut, les tuiles des demandes se font compactes pour lui laisser la place et les deux demandes (grandes tuiles illustrées de même intensité, rose de marque adouci (85 %) pour « Demander un congé », rose doux de marque (`#eddcda`) pour « Demander une avance » ; la couleur de chaque demande la suit sur ses écrans). Pas de prénom ni de message de bienvenue.
+L'écran d'atterrissage, centré sur le **Code QR** affiché en grand. Il porte aussi la réponse au dernier congé, le **logo** Beauty and Co et l'accès aux Paramètres par la **photo** du collaborateur (elle dit « c'est mon code », et une pastille roue dentée montre qu'elle se touche). Sur un petit écran, ils forment une ligne d'en-tête au-dessus du QR (logo de 80px à gauche, photo à droite) ; sur un écran haut (≥ 800px), la photo est à cheval sur le bloc du QR comme sur une carte de salarié, et le logo s'affiche en grand dans le blanc du haut. Le **QR est prioritaire** : sur un écran de moins de 700px de haut, les deux tuiles se font compactes pour lui laisser la place. En bas, deux grandes tuiles illustrées de même intensité : « Faire une demande » (avion en papier, rose doux de marque `#eddcda`, à gauche) et « Voir mon planning » (calendrier, rose de marque adouci à 85 %, à droite). Pas de prénom ni de message de bienvenue.
 _Avoid_: Dashboard, Home, Tableau de bord
 
 **Code QR**:
@@ -82,10 +84,16 @@ Le QR propre au collaborateur, qu'il montre pour son **Pointage**. Le scan se fa
 L'arrivée ou le départ d'un collaborateur au salon, pris en scannant son Code QR. C'est le même terme que dans point-de-vente.
 _Avoid_: Check-in, check-out, badgeage
 
+**Faire une demande**:
+L'écran ouvert par la tuile « Faire une demande » de l'Accueil. Une seule décision : deux tuiles carrées l'une sous l'autre, au centre de l'écran, qui s'agrandissent en proportion de l'écran (60 % de sa largeur, icône et texte compris), « Demander un congé » (palmier) et « Demander une avance » (billets), toutes deux dans le rose doux (`#eddcda`) de la tuile de l'Accueil : c'est l'icône qui les distingue. Ce rose doux suit sur tous les écrans des demandes ; le rose de marque est réservé au planning. Le retour des écrans de congé et d'avance ramène ici ; l'Envoi ramène à l'Accueil.
+
+**Planning**:
+Le planning du collaborateur, ouvert par la tuile rose « Voir mon planning » de l'Accueil. Écran pas encore dessiné.
+
 **Demande de congé**:
-Elle se fait en 2 écrans (barre de progression), construits comme l'Avance : la valeur en grand au milieu, de quoi la saisir en bas, dans le rose du congé.
-1. **Un seul calendrier** : on touche le premier jour, puis le dernier. Pas de champs « début » et « fin » à lire : au-dessus du calendrier, deux pastilles taupe montrent les jours choisis (« 20 → 24 », le mois dessous) et le **nombre de jours**. Tant qu'un jour manque, son rond en pointillés « respire » pour montrer lequel toucher. Sur le calendrier (des tuiles blanches dans un bloc rose doux, comme celui du QR), le premier et le dernier jour sont en taupe, les jours entre les deux en rose de marque, et les jours passés sont grisés. Un seul jour touché suffit pour continuer : c'est un congé d'un jour. Sur un écran de moins de 700px de haut, le récapitulatif tient sur une ligne pour qu'un mois de 6 semaines tienne sans défiler.
-2. **La raison, écrite ou en vocal** : les dates en rappel, puis un **champ de texte** (500 caractères au plus) avec, dans son coin bas droit, un **micro rose** pour dire la raison au lieu de l'écrire (60 s au plus) — comme une messagerie. Pendant l'enregistrement, le champ montre le chrono et un halo qui suit la voix ; le micro passe en taupe avec un carré « stop » et un anneau qui se remplit jusqu'à 60 s. Une fois enregistré, le vocal devient une **note vocale** comme sur WhatsApp (lecture, forme d'onde, durée) en bas du champ, avec une corbeille à la place du micro pour l'effacer. Texte et vocal peuvent être envoyés ensemble.
+Elle se fait en 2 écrans (barre de progression), construits comme l'Avance : la valeur en grand au milieu, de quoi la saisir en bas, dans le rose doux des demandes.
+1. **Un seul calendrier** : on touche le premier jour, puis le dernier. Pas de champs « début » et « fin » à lire : au-dessus du calendrier, deux pastilles taupe montrent les jours choisis (« 20 → 24 », le mois dessous) et le **nombre de jours**. Tant qu'un jour manque, son rond en pointillés « respire » pour montrer lequel toucher. Sur le calendrier (des tuiles blanches dans un bloc rose doux adouci), le premier et le dernier jour sont en taupe, les jours entre les deux en taupe léger, et les jours passés sont grisés. Un seul jour touché suffit pour continuer : c'est un congé d'un jour. Sur un écran de moins de 700px de haut, le récapitulatif tient sur une ligne pour qu'un mois de 6 semaines tienne sans défiler.
+2. **La raison, écrite ou en vocal** : les dates en rappel, puis un **champ de texte** (500 caractères au plus) avec, dans son coin bas droit, un **micro rose doux** pour dire la raison au lieu de l'écrire (60 s au plus) — comme une messagerie. Pendant l'enregistrement, le champ montre le chrono et un halo qui suit la voix ; le micro passe en taupe avec un carré « stop » et un anneau qui se remplit jusqu'à 60 s. Une fois enregistré, le vocal devient une **note vocale** comme sur WhatsApp (lecture, forme d'onde, durée) en bas du champ, avec une corbeille à la place du micro pour l'effacer. Texte et vocal peuvent être envoyés ensemble.
 
 Ensuite, « Envoyer » mène à l'**Envoi**. Aucun statut n'apparaît ensuite et il n'y a pas d'historique. La réponse ne peut être que **Accepté** ou **Refusé** (jamais « en attente »). L'Accueil affiche la réponse à la **dernière** demande dès qu'elle tombe, **en une phrase** : la décision d’abord (« Votre congé est accepté. »), les dates dessous (« Du 20 au 24 octobre »), précédée d'une icône ✓ verte ou ✗ rouge. Elle est dans une **Bulle** gris clair qui arrive par le bas puis fait un petit aller-retour pour montrer qu'on peut la faire glisser. On la **ferme** avec la croix ou en la faisant glisser sur le côté, et elle ne reparaît plus (même après avoir rouvert l'app). Rien ne s'affiche tant qu'il n'y a pas de décision.
 _Avoid_: Absence, Vacances
@@ -99,7 +107,7 @@ Notification gris clair de l'Accueil (pour l'instant, la réponse au dernier con
 _Avoid_: Toast, Alerte, Notification push
 
 **Envoi**:
-L'écran qui suit l'envoi d'une demande (congé ou avance). La demande est **envoyée, pas acceptée** : il n'y a donc ni vert ni coche, réservés à la réponse « Accepté ». C'est un écran plein, sans rien derrière : un rond dans la couleur de la demande (rose pour le congé, rose doux pour l'avance) monte du bas et rebondit. Un **avion en papier** en sort vers le haut en laissant une traînée en pointillés, puis un **sablier** apparaît dans le rond et se retourne en boucle, pour dire que la réponse viendra plus tard. Dessous : « Demande envoyée », sans les dates ni le montant. Une vibration, **pas de son**. Retour automatique à l'Accueil (environ 3 s), ou plus tôt en touchant l'écran.
+L'écran qui suit l'envoi d'une demande (congé ou avance). La demande est **envoyée, pas acceptée** : il n'y a donc ni vert ni coche, réservés à la réponse « Accepté ». C'est un écran plein, sans rien derrière : un rond rose doux, la couleur des demandes, monte du bas et rebondit. Un **avion en papier** en sort vers le haut en laissant une traînée en pointillés, puis un **sablier** apparaît dans le rond et se retourne en boucle, pour dire que la réponse viendra plus tard. Dessous : « Demande envoyée », sans les dates ni le montant. Une vibration, **pas de son**. Retour automatique à l'Accueil (environ 3 s), ou plus tôt en touchant l'écran.
 _Avoid_: Succès, Toast
 
 **Erreur**:
