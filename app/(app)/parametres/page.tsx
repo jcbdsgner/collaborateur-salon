@@ -64,7 +64,7 @@ export default function ParametresPage() {
           <LigneReglage icone={UserRound} label="Mes informations" href={ROUTES.informations} />
         </GroupeReglages>
 
-        <GroupeReglages titre="Sécurité">
+        <GroupeReglages label="Sécurité">
           <LigneReglage icone={LockKeyhole} label="Changer le code secret" href={ROUTES.changerCode} />
           {bio.disponible && (
             <LigneReglage
