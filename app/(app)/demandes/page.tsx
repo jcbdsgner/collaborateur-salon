@@ -6,7 +6,7 @@ import { TuileAction } from "@/components/ui/molecules/tuile-action";
 import { ROUTES } from "@/lib/routes";
 
 /**
- * Faire une demande (CONTEXT.md) : une seule décision, congé ou avance, en deux tuiles carrées
+ * Envoyer une demande (CONTEXT.md) : une seule décision, congé ou avance, en deux tuiles carrées
  * l'une sous l'autre au centre de l'écran, dans le rose doux de la tuile de l'Accueil : c'est
  * l'icône qui les distingue. La couleur suit sur les écrans du congé et de l'avance.
  */

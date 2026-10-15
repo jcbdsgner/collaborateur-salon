@@ -11,11 +11,13 @@ export const ROUTES = {
   accueil: "/",
   parametres: "/parametres",
   changerPhoto: "/parametres/photo",
+  /** Prénom, nom, téléphone, e-mail — en lecture seule. */
+  informations: "/parametres/informations",
   /** Aussi le parcours « Code secret oublié » une fois Face ID / l'empreinte passé. */
   changerCode: "/parametres/code-secret",
-  /** Le planning du collaborateur — écran pas encore dessiné. */
+  /** Le planning du collaborateur : la liste des jours à partir d'aujourd'hui. */
   planning: "/planning",
-  /** Faire une demande : choisir entre un congé et une avance. */
+  /** Envoyer une demande : choisir entre un congé et une avance. */
   demandes: "/demandes",
   /** Demander un congé, écran 1 : le calendrier. */
   demanderConge: "/conges",

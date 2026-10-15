@@ -43,7 +43,7 @@ const expiration = () => new Date(Date.now() + SESSION_DUREE_JOURS * 86_400_000)
 export const useAppStore = create<AppState>()(
   persist(() => INITIAL_STATE, {
     name: "collaborateur-bco",
-    version: 5,
+    version: 7,
     // Démo : un changement de forme des données repart simplement des données de départ.
     migrate: () => INITIAL_STATE,
     storage: createJSONStorage(() => localStorage),

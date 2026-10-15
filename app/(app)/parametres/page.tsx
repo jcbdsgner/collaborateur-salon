@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Camera, DoorOpen, FingerprintPattern, LockKeyhole, ScanFace, Smartphone } from "lucide-react";
+import { Camera, DoorOpen, FingerprintPattern, LockKeyhole, ScanFace, Smartphone, UserRound } from "lucide-react";
 import { FeuilleInstallation } from "@/components/accueil/invitation-installation";
 import { ErreurMessage } from "@/components/shared/erreur";
 import { Avatar } from "@/components/ui/atoms/avatar";
@@ -18,7 +18,8 @@ import { ROUTES } from "@/lib/routes";
 
 /**
  * Paramètres, un seul écran (CONTEXT.md) : sa photo en tête (on la touche pour la changer, une
- * pastille appareil photo le montre), la rubrique Sécurité (code secret, Face ID / empreinte),
+ * pastille appareil photo le montre) avec son prénom et son matricule dessous, « Mes informations » (page à part, en lecture seule),
+ * la rubrique Sécurité (code secret, Face ID / empreinte),
  * « Installer l'app » tant qu'elle n'est pas sur l'écran d'accueil du téléphone, puis
  * « Se déconnecter » en bas, sans confirmation. Le cadenas du code secret est celui de l'écran
  * qu'il ouvre ; la porte ouverte dit « je sors » mieux qu'une flèche.
@@ -53,10 +54,17 @@ export default function ParametresPage() {
               <Camera aria-hidden strokeWidth={2} className="size-5" />
             </span>
           </Link>
-          <p className="text-xl font-semibold">{collaborateur?.name}</p>
+          <div className="flex flex-col items-center">
+            <p className="text-xl font-semibold">{collaborateur?.name}</p>
+            {collaborateur?.matricule && <p className="text-sm text-base-content/50">ID {collaborateur.matricule}</p>}
+          </div>
         </div>
 
-        <GroupeReglages titre={installation.mode ? "Sécurité" : undefined} label="Sécurité">
+        <GroupeReglages label="Mes informations">
+          <LigneReglage icone={UserRound} label="Mes informations" href={ROUTES.informations} />
+        </GroupeReglages>
+
+        <GroupeReglages titre="Sécurité">
           <LigneReglage icone={LockKeyhole} label="Changer le code secret" href={ROUTES.changerCode} />
           {bio.disponible && (
             <LigneReglage

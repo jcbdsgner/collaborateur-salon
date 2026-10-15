@@ -10,10 +10,17 @@ export type DecisionConge = "accepte" | "refuse";
  */
 export type Collaborateur = {
   id: string;
+  /** Le prénom — c'est lui qu'on affiche. */
   name: string;
+  /** Nom de famille, renseigné par le salon. */
+  nom: string | null;
+  /** Matricule donné par le salon (« BC-0012 »), affiché sous le prénom dans Paramètres. */
+  matricule: string | null;
   role: Role;
   /** 9 chiffres, sans indicatif ni espaces — affiché « 77 777 77 77 ». */
   phone: string;
+  /** Renseignée par le salon ; le collaborateur la voit dans Paramètres sans pouvoir la changer. */
+  email: string | null;
   /** Absente ⇒ première connexion pas encore faite (la photo y est obligatoire). */
   photoUrl: string | null;
 };

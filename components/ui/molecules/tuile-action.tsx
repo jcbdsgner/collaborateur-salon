@@ -22,7 +22,7 @@ type Props = {
   /** Ce qui distingue la tuile, en gras : « un congé ». */
   objet: string;
   ton: Ton;
-  /** `carree` (Accueil, par deux sur une ligne) ou `centree` : carrée elle aussi, contenu centré (Faire une demande). */
+  /** `carree` (Accueil, par deux sur une ligne) ou `centree` : carrée elle aussi, contenu centré (Envoyer une demande). */
   forme?: "carree" | "centree";
 };
 

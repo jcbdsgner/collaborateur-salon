@@ -63,6 +63,35 @@ export function LigneReglage({
 }
 
 /**
+ * Une information du compte, en lecture seule : grisée, sans flèche ni contrôle, car le collaborateur
+ * ne peut pas la changer (c'est le salon qui la tient). Le `label` en petit au-dessus de la valeur.
+ */
+export function LigneInfo({ icone: I, label, valeur }: { icone: LucideIcon; label: string; valeur: string | null }) {
+  return (
+    <div aria-disabled className="flex min-h-16 w-full items-center gap-4 bg-base-200 px-4 py-2.5 text-base-content/55">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-base-300/50">
+        <I aria-hidden strokeWidth={1.75} className="size-6" />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="text-[13px]">{label}</span>
+        {/* Une adresse e-mail trop longue passe à la ligne après le « @ » plutôt qu'au hasard. */}
+        <span className="text-[17px] [overflow-wrap:anywhere]">
+          {valeur?.includes("@") ? (
+            <>
+              {valeur.slice(0, valeur.indexOf("@") + 1)}
+              <wbr />
+              {valeur.slice(valeur.indexOf("@") + 1)}
+            </>
+          ) : (
+            valeur || "—"
+          )}
+        </span>
+      </span>
+    </div>
+  );
+}
+
+/**
  * Un groupe de lignes dans une carte. Le `titre` ne s'affiche que s'il y a plusieurs groupes à
  * distinguer ; seul, la carte suffit (`label` le nomme alors pour les lecteurs d'écran).
  */

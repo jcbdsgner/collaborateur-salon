@@ -88,7 +88,7 @@ export default function AccueilPage() {
         )}
 
         <nav aria-label="Menu" className="grid grid-cols-2 gap-3">
-          <TuileAction href={ROUTES.demandes} icone={Send} verbe="Faire" objet="une demande" ton="rose-doux" />
+          <TuileAction href={ROUTES.demandes} icone={Send} verbe="Envoyer" objet="une demande" ton="rose-doux" />
           <TuileAction href={ROUTES.planning} icone={CalendarDays} verbe="Voir" objet="mon planning" ton="rose" />
         </nav>
       </div>

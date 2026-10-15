@@ -2,7 +2,7 @@ import type { Collaborateur, Compte, DemandeConge, Role } from "@/lib/data/types
 
 /**
  * L'équipe — reprise de point-de-vente (`lib/data/praticiennes.ts`) : mêmes ids, noms, rôles et
- * photos. Téléphones, codes et demandes sont inventés pour la démo.
+ * photos. Noms de famille, matricules, téléphones, e-mails, codes et demandes sont inventés pour la démo.
  *
  * Comptes de démo (code entre parenthèses) :
  * - Bineta 77 123 45 67 (1234) : congé accepté
@@ -12,14 +12,14 @@ import type { Collaborateur, Compte, DemandeConge, Role } from "@/lib/data/types
  * - Henry 70 567 89 01 (code remis à zéro par le salon) : nouveau code, sans repasser par la photo
  */
 export const COLLABORATEURS: Collaborateur[] = [
-  { id: "bineta", name: "Bineta", role: "coiffeuse", phone: "771234567", photoUrl: "/images/equipe/bineta.jpg" },
-  { id: "fatou", name: "Fatou", role: "coiffeuse", phone: "772345678", photoUrl: "/images/equipe/fatou.jpg" },
-  { id: "gnagna", name: "Gnagna", role: "estheticienne", phone: "783456789", photoUrl: "/images/equipe/gnagna.jpg" },
-  { id: "henry", name: "Henry", role: "coiffeuse", phone: "705678901", photoUrl: "/images/equipe/henry.jpg" },
-  { id: "marie-dominique", name: "Marie Dominique", role: "estheticienne", phone: "776789012", photoUrl: "/images/equipe/marie-dominique.jpg" },
-  { id: "adja", name: "Adja", role: "estheticienne", phone: "787890123", photoUrl: "/images/equipe/adja.jpg" },
-  { id: "michelle", name: "Michelle", role: "coiffeuse", phone: "764567890", photoUrl: null },
-  { id: "aissatou", name: "Aïssatou", role: "menage", phone: "778901234", photoUrl: "/images/equipe/aissatou.jpg" },
+  { id: "bineta", name: "Bineta", nom: "Ndiaye", matricule: "BC-0001", role: "coiffeuse", phone: "771234567", photoUrl: "/images/equipe/bineta.jpg", email: "bineta.ndiaye@beautyandco.sn" },
+  { id: "fatou", name: "Fatou", nom: "Diop", matricule: "BC-0002", role: "coiffeuse", phone: "772345678", photoUrl: "/images/equipe/fatou.jpg", email: "fatou.diop@beautyandco.sn" },
+  { id: "gnagna", name: "Gnagna", nom: "Sarr", matricule: "BC-0003", role: "estheticienne", phone: "783456789", photoUrl: "/images/equipe/gnagna.jpg", email: "gnagna.sarr@beautyandco.sn" },
+  { id: "henry", name: "Henry", nom: "Mendy", matricule: "BC-0004", role: "coiffeuse", phone: "705678901", photoUrl: "/images/equipe/henry.jpg", email: "henry.mendy@beautyandco.sn" },
+  { id: "marie-dominique", name: "Marie Dominique", nom: "Gomis", matricule: "BC-0005", role: "estheticienne", phone: "776789012", photoUrl: "/images/equipe/marie-dominique.jpg", email: "marie-dominique.gomis@beautyandco.sn" },
+  { id: "adja", name: "Adja", nom: "Fall", matricule: "BC-0006", role: "estheticienne", phone: "787890123", photoUrl: "/images/equipe/adja.jpg", email: "adja.fall@beautyandco.sn" },
+  { id: "michelle", name: "Michelle", nom: "Faye", matricule: "BC-0007", role: "coiffeuse", phone: "764567890", photoUrl: null, email: null },
+  { id: "aissatou", name: "Aïssatou", nom: "Ba", matricule: "BC-0008", role: "menage", phone: "778901234", photoUrl: "/images/equipe/aissatou.jpg", email: "aissatou.ba@beautyandco.sn" },
 ];
 
 /** Comptes de départ, par `Collaborateur.id`. */

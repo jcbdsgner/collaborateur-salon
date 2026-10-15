@@ -47,7 +47,7 @@ const DEMO_OUVERTE = true;
 
 /** Démo ouverte : le compte neuf d'un numéro inconnu. */
 function inscrire(numero: string): Collaborateur {
-  const c: Collaborateur = { id: `collaborateur-${numero}`, name: "Collaborateur", role: "coiffeuse", phone: numero, photoUrl: null };
+  const c: Collaborateur = { id: `collaborateur-${numero}`, name: "Collaborateur", nom: null, matricule: null, role: "coiffeuse", phone: numero, email: null, photoUrl: null };
   set((s) => ({ collaborateurs: [...s.collaborateurs, c], comptes: { ...s.comptes, [c.id]: { code: null } } }));
   return c;
 }

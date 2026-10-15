@@ -30,8 +30,8 @@ Connexion
 Accueil
  ├─ Code QR (en grand)
  ├─ Réponse au dernier congé : ✓ / ✗ + dates (rien tant qu'il n'y a pas de décision)
- ├─ ▶ Paramètres : Changer la photo · [Sécurité : Changer le code secret · Face ID / empreinte] · Se déconnecter
- ├─ ▶ Faire une demande :
+ ├─ ▶ Paramètres : Changer la photo · ▶ Mes informations (lecture seule) · [Sécurité : Changer le code secret · Face ID / empreinte] · Se déconnecter
+ ├─ ▶ Envoyer une demande :
  │     ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison (écrite et/ou vocal) ─▶ Envoi
  │     └─ ▶ Demander une avance : montant ─▶ Envoi
  └─ ▶ Voir mon planning : liste continue des jours à partir d'aujourd'hui
@@ -74,7 +74,7 @@ Se connecter avec le moyen de déverrouillage du téléphone (Face ID, Touch ID,
 _Avoid_: Passkey
 
 **Accueil**:
-L'écran d'atterrissage, centré sur le **Code QR** affiché en grand. Il porte aussi la réponse au dernier congé, le **logo** Beauty and Co et l'accès aux Paramètres par la **photo** du collaborateur (elle dit « c'est mon code », et une pastille roue dentée montre qu'elle se touche). Sur un petit écran, ils forment une ligne d'en-tête au-dessus du QR (logo de 80px à gauche, photo à droite) ; sur un écran haut (≥ 800px), la photo est à cheval sur le bloc du QR comme sur une carte de salarié, et le logo s'affiche en grand dans le blanc du haut. Le **QR est prioritaire** : sur un écran de moins de 700px de haut, les deux tuiles se font compactes pour lui laisser la place. En bas, deux grandes tuiles illustrées de même intensité : « Faire une demande » (avion en papier, rose doux de marque `#eddcda`, à gauche) et « Voir mon planning » (calendrier, rose de marque adouci à 85 %, à droite). Pas de prénom ni de message de bienvenue.
+L'écran d'atterrissage, centré sur le **Code QR** affiché en grand. Il porte aussi la réponse au dernier congé, le **logo** Beauty and Co et l'accès aux Paramètres par la **photo** du collaborateur (elle dit « c'est mon code », et une pastille roue dentée montre qu'elle se touche). Sur un petit écran, ils forment une ligne d'en-tête au-dessus du QR (logo de 80px à gauche, photo à droite) ; sur un écran haut (≥ 800px), la photo est à cheval sur le bloc du QR comme sur une carte de salarié, et le logo s'affiche en grand dans le blanc du haut. Le **QR est prioritaire** : sur un écran de moins de 700px de haut, les deux tuiles se font compactes pour lui laisser la place. En bas, deux grandes tuiles illustrées de même intensité : « Envoyer une demande » (avion en papier, rose doux de marque `#eddcda`, à gauche) et « Voir mon planning » (calendrier, rose de marque adouci à 85 %, à droite). Pas de prénom ni de message de bienvenue.
 _Avoid_: Dashboard, Home, Tableau de bord
 
 **Code QR**:
@@ -84,8 +84,8 @@ Le QR propre au collaborateur, qu'il montre pour son **Pointage**. Le scan se fa
 L'arrivée ou le départ d'un collaborateur au salon, pris en scannant son Code QR. C'est le même terme que dans point-de-vente.
 _Avoid_: Check-in, check-out, badgeage
 
-**Faire une demande**:
-L'écran ouvert par la tuile « Faire une demande » de l'Accueil. Une seule décision : deux tuiles carrées l'une sous l'autre, au centre de l'écran, qui s'agrandissent en proportion de l'écran (60 % de sa largeur, icône et texte compris), « Demander un congé » (palmier) et « Demander une avance » (billets), toutes deux dans le rose doux (`#eddcda`) de la tuile de l'Accueil : c'est l'icône qui les distingue. Ce rose doux suit sur tous les écrans des demandes ; le rose de marque est réservé au planning. Le retour des écrans de congé et d'avance ramène ici ; l'Envoi ramène à l'Accueil.
+**Envoyer une demande**:
+L'écran ouvert par la tuile « Envoyer une demande » de l'Accueil. Une seule décision : deux tuiles carrées l'une sous l'autre, au centre de l'écran, qui s'agrandissent en proportion de l'écran (60 % de sa largeur, icône et texte compris), « Demander un congé » (palmier) et « Demander une avance » (billets), toutes deux dans le rose doux (`#eddcda`) de la tuile de l'Accueil : c'est l'icône qui les distingue. Ce rose doux suit sur tous les écrans des demandes ; le rose de marque est réservé au planning. Le retour des écrans de congé et d'avance ramène ici ; l'Envoi ramène à l'Accueil.
 
 **Planning**:
 Le planning du collaborateur, ouvert par la tuile rose « Voir mon planning » de l'Accueil, **sur fond blanc**. Une **liste continue de jours** à partir d'aujourd'hui (28 jours), sans navigation par semaine ; le bas de l'écran s'estompe pour montrer qu'elle continue. Chaque ligne : la **date** à gauche (le chiffre en gros, le jour en petit ; aujourd'hui dans une tuile anthracite), et à droite une **carte par créneau** : le salon (épingle + nom) et les heures en gros (« 9h → 18h »). Le salon se reconnaît à sa couleur : **rose de marque = Almadies**, **taupe = Sea Plaza** ; pas de photo de salon. Une **journée coupée** entre les deux salons empile ses cartes : celle de l'après-midi glisse sous celle du matin (ses coins du haut restent droits, cachés dessous). Un jour de **repos** n'a pas de carte, seulement un cadre en pointillé avec une lune.
@@ -115,7 +115,7 @@ _Avoid_: Succès, Toast
 Elle se montre et se ressent sans texte : l'écran **tremble**, le téléphone **vibre** (pas sur iPhone, où Safari ne le permet pas), une couleur rouge et un **picto propre à l'erreur** (`Erreur.code` : numéro inconnu → aller voir le salon, code faux, micro refusé…). Le message texte reste disponible pour les lecteurs d'écran.
 
 **Paramètres**:
-Un seul écran, sans sous-menu : sa photo en tête (on la touche pour la changer ; une pastille appareil photo le montre), la rubrique **Sécurité**, puis « Se déconnecter » en bas (**sans confirmation**). Changer la photo : la photo en grand, « Prendre une photo » (caméra frontale), puis « Enregistrer » ou « Reprendre ».
+Un seul écran : sa photo en tête (on la touche pour la changer ; une pastille appareil photo le montre), son prénom et, en petit dessous, son **matricule** (« ID BC-0001 », donné par le salon), la ligne **Mes informations** qui ouvre une page à part (nom complet, téléphone, e-mail : **grisés, non modifiables**, c'est le salon qui les tient ; « — » si l'un manque), la rubrique **Sécurité**, puis « Se déconnecter » en bas (**sans confirmation**). Changer la photo : la photo en grand, « Prendre une photo » (caméra frontale), puis « Enregistrer » ou « Reprendre ».
 _Avoid_: Réglages, Mon compte
 
 **Sécurité**:
