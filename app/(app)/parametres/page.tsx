@@ -85,7 +85,7 @@ export default function ParametresPage() {
         <ErreurMessage erreur={bio.erreur} />
 
         {installation.mode && (
-          <GroupeReglages titre="Application">
+          <GroupeReglages label="Application">
             <LigneReglage
               icone={Smartphone}
               label="Installer l'app"
