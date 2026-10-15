@@ -53,3 +53,30 @@ export function todayISO(): string {
   const pad = (n: number) => String(n).padStart(2, "0");
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
+
+/** « 2026-10-15 » → Date locale à minuit (sans décalage de fuseau). */
+export function dateLocale(iso: string): Date {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+/** Ajoute `n` jours à une date ISO (yyyy-MM-dd). */
+export function ajouterJours(iso: string, n: number): string {
+  const d = dateLocale(iso);
+  d.setDate(d.getDate() + n);
+  const pad = (x: number) => String(x).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+const JOUR_COURT = new Intl.DateTimeFormat("fr-FR", { weekday: "short" });
+
+/** « 2026-10-15 » → « jeu. ». */
+export function formatJourCourt(iso: string): string {
+  return JOUR_COURT.format(dateLocale(iso));
+}
+
+/** « 09:00 » → « 9h », « 14:30 » → « 14h30 ». */
+export function formatHeure(hhmm: string): string {
+  const [h, m] = hhmm.split(":");
+  return `${Number(h)}h${m === "00" ? "" : m}`;
+}

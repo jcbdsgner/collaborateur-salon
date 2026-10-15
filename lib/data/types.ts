@@ -55,3 +55,16 @@ export type DemandeAvance = {
   /** ISO datetime. */
   envoyeeLe: string;
 };
+
+/** Les deux salons Beauty and Co. Sur le Planning, chacun a sa couleur (rose, taupe), pas de photo. */
+export type Salon = "almadies" | "sea-plaza";
+
+/** Une partie de journée dans un salon. Heures « HH:mm », `fin` > `debut`. */
+export type Creneau = { salon: Salon; debut: string; fin: string };
+
+/** Un jour du Planning : aucun créneau ⇒ repos ; deux ⇒ journée coupée entre les deux salons. */
+export type JourPlanning = {
+  /** ISO date (yyyy-MM-dd). */
+  date: string;
+  creneaux: Creneau[];
+};

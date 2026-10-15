@@ -34,7 +34,7 @@ Accueil
  ├─ ▶ Faire une demande :
  │     ├─ ▶ Demander un congé : 1. calendrier (1er jour puis dernier) ─▶ 2. raison (écrite et/ou vocal) ─▶ Envoi
  │     └─ ▶ Demander une avance : montant ─▶ Envoi
- └─ ▶ Voir mon planning (écran pas encore dessiné)
+ └─ ▶ Voir mon planning : liste continue des jours à partir d'aujourd'hui
 ```
 
 ## Language
@@ -88,7 +88,8 @@ _Avoid_: Check-in, check-out, badgeage
 L'écran ouvert par la tuile « Faire une demande » de l'Accueil. Une seule décision : deux tuiles carrées l'une sous l'autre, au centre de l'écran, qui s'agrandissent en proportion de l'écran (60 % de sa largeur, icône et texte compris), « Demander un congé » (palmier) et « Demander une avance » (billets), toutes deux dans le rose doux (`#eddcda`) de la tuile de l'Accueil : c'est l'icône qui les distingue. Ce rose doux suit sur tous les écrans des demandes ; le rose de marque est réservé au planning. Le retour des écrans de congé et d'avance ramène ici ; l'Envoi ramène à l'Accueil.
 
 **Planning**:
-Le planning du collaborateur, ouvert par la tuile rose « Voir mon planning » de l'Accueil. Écran pas encore dessiné.
+Le planning du collaborateur, ouvert par la tuile rose « Voir mon planning » de l'Accueil, **sur fond blanc**. Une **liste continue de jours** à partir d'aujourd'hui (28 jours), sans navigation par semaine ; le bas de l'écran s'estompe pour montrer qu'elle continue. Chaque ligne : la **date** à gauche (le chiffre en gros, le jour en petit ; aujourd'hui dans une tuile anthracite), et à droite une **carte par créneau** : le salon (épingle + nom) et les heures en gros (« 9h → 18h »). Le salon se reconnaît à sa couleur : **rose de marque = Almadies**, **taupe = Sea Plaza** ; pas de photo de salon. Une **journée coupée** entre les deux salons empile ses cartes : celle de l'après-midi glisse sous celle du matin (ses coins du haut restent droits, cachés dessous). Un jour de **repos** n'a pas de carte, seulement un cadre en pointillé avec une lune.
+_Avoid_: Emploi du temps, Agenda
 
 **Demande de congé**:
 Elle se fait en 2 écrans (barre de progression), construits comme l'Avance : la valeur en grand au milieu, de quoi la saisir en bas, dans le rose doux des demandes.

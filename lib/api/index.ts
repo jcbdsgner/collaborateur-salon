@@ -1,7 +1,8 @@
 import { fermerSession, ouvrirSession, useAppStore } from "@/lib/store/app-store";
-import { isValidCode, isValidPhone, normalizePhone, todayISO } from "@/lib/format";
+import { ajouterJours, dateLocale, isValidCode, isValidPhone, normalizePhone, todayISO } from "@/lib/format";
+import { SEMAINES_TYPES } from "@/lib/data/planning";
 import { ROUTES } from "@/lib/routes";
-import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, RaisonConge } from "@/lib/data/types";
+import type { Collaborateur, DecisionConge, DemandeAvance, DemandeConge, JourPlanning, RaisonConge } from "@/lib/data/types";
 
 /**
  * L'API simulée — la seule porte des écrans vers les données. Chaque appel est asynchrone avec
@@ -302,4 +303,23 @@ export async function demanderAvance(montant: number): Promise<void> {
   }
   const demande: DemandeAvance = { id: nextId("da"), collaborateurId: c.id, montant, envoyeeLe: new Date().toISOString() };
   set((s) => ({ demandesAvance: [...s.demandesAvance, demande] }));
+}
+
+// ── Planning ─────────────────────────────────────────────────────────────
+
+/** Le Planning montre ce nombre de jours, à partir d'aujourd'hui. */
+export const PLANNING_NB_JOURS = 28;
+
+/** Les jours à venir, aujourd'hui en premier, repos compris (jour sans créneau). */
+export async function getPlanning(): Promise<JourPlanning[]> {
+  await wait();
+  moi();
+  const aujourdhui = todayISO();
+  return Array.from({ length: PLANNING_NB_JOURS }, (_, i) => {
+    const date = ajouterJours(aujourdhui, i);
+    const d = dateLocale(date);
+    // Numéro de semaine (lundi → dimanche) depuis 1970, pour alterner les deux semaines types.
+    const semaine = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86_400_000 + 3) / 7);
+    return { date, creneaux: SEMAINES_TYPES[semaine % SEMAINES_TYPES.length][d.getDay()] };
+  });
 }
